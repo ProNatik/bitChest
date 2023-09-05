@@ -3,7 +3,9 @@ import { ref } from 'vue';
 import router from '../router';
 import axiosClient from "@/axios";
 
-const title = router.currentRoute.value.meta.title;
+const title = computed(() => {
+  return router.currentRoute.value.meta.title;
+});
 
 async function logout() { 
     try {

@@ -2,7 +2,10 @@
 import { useUsers } from '@/composables/users';
 import { ref } from 'vue';
 import { userRemove } from '@/services/users';
+import { useTitle } from '@vueuse/core';
+import router from '@/router';
 
+useTitle('List User - BitChest')
 
 const errorMessage = ref(null);
 const success = ref(null);
@@ -20,7 +23,7 @@ async function deleteUser(user) {
 }
 
 function updateUser(user) {
-    router.push({ name: 'updatePaire', params: { from_devise: paire.from_devise, to_devise: paire.to_devise, value: paire.value } })
+    router.push({ name: 'adminUserUpdate', params: { user_id: user.id } })
 }
 
 </script>

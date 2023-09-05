@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\API\CryptoValuesController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,7 @@ Route::post('logout', [AuthController::class, 'logout']);
 
 Route::middleware('auth:sanctum')->group(function () {
 
-    Route::apiResource('users', UserController::class); //Les routes devises.* de l'API
+    Route::apiResource('users', UserController::class); //Les routes users.* de l'API
+    Route::apiResource('cryptoValues', CryptoValuesController::class);
 
 });

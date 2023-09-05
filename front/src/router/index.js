@@ -4,6 +4,9 @@ import LoginView from '@/views/LoginView.vue'
 import AdminLayout from '@/components/AdminLayout.vue'
 import AdminHomeView from '@/views/admin/AdminHomeView.vue'
 import AdminUserListView from '@/views/admin/AdminUserListView.vue'
+import AdminCreateUserView from '@/views/admin/AdminCreateUserView.vue'
+import AdminUserUpdateView from '@/views/admin/AdminUserUpdateView.vue'
+import AdminCryptoDetailsView from '@/views/admin/AdminCryptoDetailsView.vue'
 import ClientLayout from '@/components/ClientLayout.vue'
 import ClientHomeView from '@/views/client/ClientHomeView.vue'
 import { userStore } from '@/store'
@@ -30,7 +33,27 @@ const router = createRouter({
                 path: 'adminUserList',
                 name: 'adminUserList',
                 component: AdminUserListView,
-                meta: { title: 'Admin UserList', admin: true }
+                meta: { title: 'Admin User List', admin: true }
+            },
+            {
+                path: 'adminCreateUser',
+                name: 'adminCreateUser',
+                component: AdminCreateUserView,
+                meta: { title: 'Admin Create User', admin: true }
+            },
+            {
+                path: 'adminUserUpdate/:user_id',
+                name: 'adminUserUpdate',
+                component: AdminUserUpdateView,
+                props: true,
+                meta: { title: 'Admin Update User', admin: true }
+            },
+            {
+                path: 'adminCryptoDetails/:crypto_id',
+                name: 'adminCryptoDetails',
+                component: AdminCryptoDetailsView,
+                props: true,
+                meta: { title: 'Admin Update User', admin: true }
             }
         ]
       },
@@ -42,7 +65,7 @@ const router = createRouter({
                 path: 'clientHome',
                 name: 'clientHome',
                 component: ClientHomeView,
-                meta: { title: 'Client Home' }
+                meta: { title: 'Client Home', client: true }
             }
         ]
       }
@@ -59,6 +82,13 @@ router.beforeEach((to, from, next) => {
     } else {
         next();
     }
-  });
+
+    if (to.meta.client && Store.role !== 'client') {
+        localStorage.removeItem('token');
+        next({name: 'login'});
+    } else {
+        next();
+    }
+});
 
 export default router

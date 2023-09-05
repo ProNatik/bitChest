@@ -16,4 +16,5 @@ class CryptoValues extends Model
     {
         return $this->belongsTo(Crypto::class);
     }
+
 }

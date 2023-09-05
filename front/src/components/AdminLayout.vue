@@ -8,8 +8,9 @@ const title = computed(() => {
 });
 
 const routes = [
-  { to: 'adminHome', text: 'Home' },
-  { to: 'adminUserList', text: 'Users List' },
+  { to: '/admin/adminHome', text: 'Home' },
+  { to: '/admin/adminUserList', text: 'Users List' },
+  { to: '/admin/adminCreateUser', text: 'Create User' },
 ]
 
 async function logout() { 
