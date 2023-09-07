@@ -17,7 +17,16 @@ class CryptoWalletController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $cryptos = DB::select('SELECT cw.*, c.name FROM crypto_wallets AS cw
+                                JOIN cryptos c ON c.id = cw.crypto_id
+                                WHERE cw.user_id = ? order by cw.id desc', [Auth::user()->id]);
+
+            return response()->json($cryptos);
+
+        } catch (\Exception $exception) {
+            return $exception;
+        }
     }
 
     /**
@@ -94,6 +103,17 @@ class CryptoWalletController extends Controller
      */
     public function destroy(CryptoWallet $cryptoWallet)
     {
-        //
+        try {
+            // $cryptos = DB::select('SELECT c.id, c.name, cv.value, cv.date FROM crypto_values AS cv
+            //                     JOIN cryptos AS c ON c.id = cv.crypto_id
+            //                     WHERE cv.crypto_id = ? order by cv.date', [$id]);
+
+            $cryptoWallet->delete();
+
+            return response()->json(null, 201);
+
+        } catch (\Exception $exception) {
+            return $exception;
+        }
     }
 }

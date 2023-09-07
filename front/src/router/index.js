@@ -11,6 +11,7 @@ import ClientLayout from '@/components/ClientLayout.vue'
 import ClientHomeView from '@/views/client/ClientHomeView.vue'
 import ClientCryptoDetailsView from '@/views/client/ClientCryptoDetailsView.vue'
 import ClientBuyCryptoView from '@/views/client/ClientBuyCryptoView.vue'
+import ClientProfilView from '@/views/client/ClientProfilView.vue'
 import { userStore } from '@/store'
 
 const router = createRouter({

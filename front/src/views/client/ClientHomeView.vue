@@ -7,7 +7,7 @@ import router from '@/router';
 
 useTitle('Home - BitChest')
 
-const success = ref(null);
+
 
 const { cryptos, error, loading } = useCryptos();
 

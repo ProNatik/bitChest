@@ -20,3 +20,13 @@ export async function buyCrypto(id, quantity, price, solde) {
     });
     return response;
 }
+
+export async function boughtCryptoFetchAll() {
+    const response = await axiosClient.get(`/cryptoWallet`);
+    return response.data;
+}
+
+export async function sellCrypto(crypto) {
+    const response = await axiosClient.delete(`/cryptoWallet/${crypto.id}`);
+    return response.data;
+}

@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import { cryptoFetchAll, cryptoFetchOne } from "../services/crypto";
+import { boughtCryptoFetchAll, cryptoFetchAll, cryptoFetchOne } from "../services/crypto";
 
 export function useCryptos() {
     const cryptos = ref(null);
@@ -48,4 +48,25 @@ export async function useCrypto(id) {
     }
 
   return { crypto, labels, chartData, error, loading }
+}
+
+export function useBoughtCryptos() {
+    const boughtCryptos = ref(null);
+    const error = ref(null);
+    const loading = ref(false);
+
+    async function FetchData() {
+        loading.value = true
+        try {
+        const response = await boughtCryptoFetchAll()
+        boughtCryptos.value = response
+        } catch (err) {
+        error.value = err.message
+        } finally {
+        loading.value = false
+        }
+    }
+    FetchData();
+  
+  return { boughtCryptos, error, loading }
 }
