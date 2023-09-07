@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamp('purchase_at')->useCurrent();
             $table->softDeletes('sell_at');
-            $table->integer('capital_gain');
+            $table->integer('capital_gain')->nullable(true);
             $table->integer('quantity')->nullable(false);
             //foreign key
             $table->unsignedBigInteger('user_id')->nullable(false);

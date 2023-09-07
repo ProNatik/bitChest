@@ -18,7 +18,7 @@ class CryptoWalletFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::all()->random()->username,
+            'user_id' => User::factory(),
             'solde' => $this->faker->randomElement([150, 30, 80, 50, 60, 75, 100]),
         ];
     }

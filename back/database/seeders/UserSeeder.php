@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Wallet;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -23,6 +24,7 @@ class UserSeeder extends Seeder
                     ['username' => 'vincent'],
                     ['username' => 'alexi'],
                 )
+                ->has(Wallet::factory()->count(1))
                 ->create();
     }
 }
