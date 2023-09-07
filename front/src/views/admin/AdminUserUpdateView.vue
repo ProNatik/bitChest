@@ -1,6 +1,6 @@
 <script setup>
 import { useTitle } from '@vueuse/core';
-import { ref, reactive } from 'vue';
+import { ref } from 'vue';
 import { useUser } from '@/composables/users';
 import { userUpdate } from '@/services/users';
 

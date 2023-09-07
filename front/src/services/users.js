@@ -33,3 +33,8 @@ export async function userRemove(user) {
     const response = await axiosClient.delete(`/users/${user.id}`);
     return response.data
 }
+
+export async function userSolde() {
+    const response = await axiosClient.get(`/wallet`);
+    return response.data
+}

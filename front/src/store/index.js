@@ -6,7 +6,8 @@ import { ref } from 'vue'
 // and `Store` (e.g. `useUserStore`, `useCartStore`, `useProductStore`)
 // the first argument is a unique id of the store across your application
 export const userStore = defineStore('user', () => {
-    const role = ref(null)
+    const role = ref(null);
+    const solde = ref(null);
 
-    return { role }
+    return { role, solde }
 })

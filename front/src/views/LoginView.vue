@@ -4,6 +4,7 @@ import { useTitle } from '@vueuse/core'
 import axios from 'axios'
 import { useRouter } from 'vue-router';
 import { userStore } from '../store';
+import { useUserSolde } from '@/composables/users';
 
 useTitle('Login - BitChest')
 
@@ -23,6 +24,7 @@ const rules = {
   required: (value) => value.trim() !== '' || 'Champs obligatoire',
 }
 
+
 async function submit() { 
   if (formState.value) {
     loading.value = true;
@@ -34,6 +36,9 @@ async function submit() {
     .then(res => {
       localStorage.setItem('token', res.data.token);
       Store.role = res.data.role;
+      useUserSolde().then(data => {
+        Store.solde = data.solde.value[0].solde;
+      })
     })
     .catch(err => console.log(err));
 

@@ -53,17 +53,17 @@ onMounted(async () => {
     responsive: true,
     
   };
-})
-
-
-
-         
+})   
   
 
 </script>
 
 <template>
+  
+
   <v-sheet maxWidth="800" class="mt-5 mx-auto w-75" rounded="xl">
     <Line v-if="data" :data="data" :options="options" />
   </v-sheet>
+  
+
 </template>

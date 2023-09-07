@@ -9,6 +9,8 @@ import AdminUserUpdateView from '@/views/admin/AdminUserUpdateView.vue'
 import AdminCryptoDetailsView from '@/views/admin/AdminCryptoDetailsView.vue'
 import ClientLayout from '@/components/ClientLayout.vue'
 import ClientHomeView from '@/views/client/ClientHomeView.vue'
+import ClientCryptoDetailsView from '@/views/client/ClientCryptoDetailsView.vue'
+import ClientBuyCryptoView from '@/views/client/ClientBuyCryptoView.vue'
 import { userStore } from '@/store'
 
 const router = createRouter({
@@ -53,7 +55,7 @@ const router = createRouter({
                 name: 'adminCryptoDetails',
                 component: AdminCryptoDetailsView,
                 props: true,
-                meta: { title: 'Admin Update User', admin: true }
+                meta: { title: 'Admin CryptoDetails', admin: true }
             }
         ]
       },
@@ -65,8 +67,29 @@ const router = createRouter({
                 path: 'clientHome',
                 name: 'clientHome',
                 component: ClientHomeView,
-                meta: { title: 'Client Home', client: true }
-            }
+                meta: { title: 'Home', client: true }
+            },
+            {
+                path: 'clientCryptoDetails/:crypto_id',
+                name: 'clientCryptoDetails',
+                component: ClientCryptoDetailsView,
+                props: true,
+                meta: { title: 'CryptoDetails', client: true }
+            },
+            {
+                path: 'clientBuyCrypto/:crypto_id',
+                name: 'clientBuyCrypto',
+                component: ClientBuyCryptoView,
+                props: true,
+                meta: { title: 'BuyCrypto', client: true }
+            },
+            {
+                path: 'clientProfil',
+                name: 'clientProfil',
+                component: ClientProfilView,
+                props: true,
+                meta: { title: 'Profil', client: true }
+            },
         ]
       }
     ]

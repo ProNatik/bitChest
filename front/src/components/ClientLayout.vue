@@ -1,11 +1,14 @@
 <script setup>
-import { ref } from 'vue';
+import { computed } from 'vue';
 import router from '../router';
 import axiosClient from "@/axios";
+import { userStore } from '../store';
 
 const title = computed(() => {
   return router.currentRoute.value.meta.title;
 });
+
+const Store = userStore();
 
 async function logout() { 
     try {
@@ -21,6 +24,11 @@ async function logout() {
     }
 }
 
+const routes = [
+  { to: '/clientHome', text: 'Home' },
+  { to: '/clientProfil', text: 'Profil' }
+]
+
 </script>
 
 <template>
@@ -34,7 +42,12 @@ async function logout() {
         </div>
         
         <v-list>
-          <v-list-item title="Navigation drawer"></v-list-item>
+          <v-list-item>
+            <v-list-item-title>Solde : {{ Store.solde }} </v-list-item-title>
+          </v-list-item>
+          <v-list-item v-for="{ to, text } in routes" :to="to" :key="to">
+            <v-list-item-title>{{ text }}</v-list-item-title>
+          </v-list-item>
         </v-list>
       </v-navigation-drawer>
 

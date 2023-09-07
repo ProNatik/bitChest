@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import { usersFetchAll, usersFetchOne } from "../services/users";
+import { userSolde, usersFetchAll, usersFetchOne } from "../services/users";
 
 
 export function useUsers() {
@@ -42,4 +42,24 @@ async function FetchData() {
 }
   FetchData()
   return { user, error, loading }
+}
+
+export async function useUserSolde() {
+  const solde = ref(null);
+  const error = ref(null);
+  const loading = ref(false);
+
+
+  loading.value = true
+  try {
+    const response = await userSolde()
+    solde.value = response;
+    
+  } catch (err) {
+    error.value = err.message
+  } finally {
+    loading.value = false
+    
+  }
+  return { solde, error, loading }
 }

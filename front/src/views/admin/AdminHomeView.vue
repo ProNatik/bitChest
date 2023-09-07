@@ -53,7 +53,7 @@ function showCrypto(crypto) {
             <v-btn
             @click="showCrypto(crypto)"
             variant="outlined"
-            size="x-small"
+            size="small"
             color="blue"
             >Details</v-btn>
         </td>
