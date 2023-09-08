@@ -17,6 +17,6 @@ class Helpers {
     * @param $cryptoname {string} Le nom de la crypto monnaie
     */
     public static function getCotationFor($cryptoname){
-        return abs((rand(0, 99)>40) ? 1 : -1) * abs((rand(0, 99)>49) ? ord(substr($cryptoname,0,1)) : ord(substr($cryptoname,-1))) * (rand(1,10) * .01);
+        return abs((rand(0, 99)>40) ? 1 : -1) * abs((rand(0, 99)>49) ? ord(substr($cryptoname,0,1)) : abs(ord(substr($cryptoname,-1)))) * (rand(1,10) * .01);
     }
 }

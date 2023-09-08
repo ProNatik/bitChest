@@ -25,9 +25,7 @@ const rules = {
 const crypto = ref(null);
 
 useCrypto(props.crypto_id).then(data => {
-    
     crypto.value = data.crypto.value;
-    console.log(crypto)
 })
 
 const form = reactive({
@@ -40,7 +38,6 @@ async function buy() {
     try {
       await buyCrypto(props.crypto_id, form.quantity, crypto.value[29].value, Store.solde)
     .then(res => {
-      console.log(res.data);
       Store.solde = res.data.newSolde;
       success.value = res.data.message;
     })
@@ -59,36 +56,43 @@ const formState = ref();
 
 
 <template>
-    <v-sheet max-width="300" min-width="100" class="mx-auto mt-10" v-if="crypto" style="margin-bottom: 10px;">
-        <div style="text-align: center; margin-bottom: 5px;">
-            {{ crypto[0].name }}
-        </div>
-      <v-form validate-on="blur" @submit.prevent="buy" v-model="formState">
-        <v-text-field
-          variant="outlined"
-          v-model="crypto[29].value"
-          label="Price"
-          readonly
-          class="mt-2"
-        ></v-text-field>
-        <v-text-field
-          variant="outlined"
-          v-model="form.quantity"
-          :rules="[rules.required]"
-          label="Quantity"
-          type="text"
-          class="mt-2"
-        ></v-text-field>
-  
-        <v-btn
-          :loading="loading"
-          type="submit"
-          block
-          class="mt-2"
-          text="Buy"
-        ></v-btn>
-      </v-form>
-      <v-alert type="success" v-if="success" :text="success" />
-      <v-alert type="error" v-if="error" :text="error" />
-    </v-sheet>
+    <div>
+        
+        <v-sheet max-width="500" min-width="100" class="mx-auto mt-10" v-if="crypto" style="margin-bottom: 10px;">
+            
+            
+            <div  style="margin-bottom: 5px; text-align: center;">
+                {{ crypto[0].name }}
+            </div>
+        <v-form validate-on="blur" @submit.prevent="buy" v-model="formState" class="mx-auto">
+            <v-text-field
+            variant="outlined"
+            v-model="crypto[29].value"
+            label="Price"
+            readonly
+            class="mt-2"
+            ></v-text-field>
+            <v-text-field
+            variant="outlined"
+            v-model="form.quantity"
+            :rules="[rules.required]"
+            label="Quantity"
+            type="text"
+            class="mt-2"
+            ></v-text-field>
+    
+            <v-btn
+            :loading="loading"
+            type="submit"
+            block
+            class="mt-2"
+            text="Buy"
+            ></v-btn>
+        </v-form>
+        
+        </v-sheet>
+        <v-alert type="success" v-if="success" :text="success" />
+        <v-alert type="error" v-if="error" :text="error" />
+    </div>
+    
   </template>

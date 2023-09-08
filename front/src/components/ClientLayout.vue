@@ -43,7 +43,7 @@ const routes = [
         
         <v-list>
           <v-list-item>
-            <v-list-item-title>Solde : {{ Store.solde }} </v-list-item-title>
+            <v-list-item-title>Solde : {{ Store.solde }} $ </v-list-item-title>
           </v-list-item>
           <v-list-item v-for="{ to, text } in routes" :to="to" :key="to">
             <v-list-item-title>{{ text }}</v-list-item-title>

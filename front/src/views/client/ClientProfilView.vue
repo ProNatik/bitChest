@@ -4,11 +4,15 @@ import { useBoughtCryptos } from '@/composables/cryptos';
 import { sellCrypto } from '@/services/crypto';
 import { ref } from 'vue';
 import router from '@/router';
+import { userStore } from '@/store';
 
 
 useTitle('Profil - BitChest')
 
+const Store = userStore();
+
 const errorMessage = ref(null);
+const success = ref(null);
 const { boughtCryptos, error, loading } = useBoughtCryptos();
 
 
@@ -18,7 +22,10 @@ function showCrypto(crypto) {
 
 async function sellCryptoBtn(crypto) {
     try {
-        await sellCrypto(crypto)
+        await sellCrypto(crypto).then(data => {
+            Store.solde = data.newSolde[0].solde;
+            success.value = data.addToSolde +'$ gagné' 
+        });
         boughtCryptos.value = boughtCryptos.value.filter((bC) => bC !== crypto)
     } catch (error) {
         errorMessage.value = error.message
@@ -40,9 +47,6 @@ async function sellCryptoBtn(crypto) {
           Quantity
         </th>
         <th class="text-center">
-          Gain
-        </th>
-        <th class="text-center">
           Sell
         </th>
         <th class="text-center">
@@ -58,7 +62,6 @@ async function sellCryptoBtn(crypto) {
       >
         <td>{{ boughtCrypto.name }}</td>
         <td>{{ boughtCrypto.quantity }} </td>
-        <td>{{ boughtCrypto.capital_gain ?? '0,00' }} </td>
         <td>
             <v-btn
             @click="sellCryptoBtn(boughtCrypto)"
@@ -84,6 +87,7 @@ async function sellCryptoBtn(crypto) {
       :style="{ maxWidth: '40rem' }"
       class="ma-auto"
     />
+    <v-alert type="success" v-if="success" :text="success" />
     <v-alert type="error" v-if="errorMessage" :text="errorMessage" />
   </v-sheet>
   

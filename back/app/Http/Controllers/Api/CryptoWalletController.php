@@ -20,7 +20,7 @@ class CryptoWalletController extends Controller
         try {
             $cryptos = DB::select('SELECT cw.*, c.name FROM crypto_wallets AS cw
                                 JOIN cryptos c ON c.id = cw.crypto_id
-                                WHERE cw.user_id = ? order by cw.id desc', [Auth::user()->id]);
+                                WHERE cw.user_id = ? AND cw.sell_at is NULL order by cw.id desc', [Auth::user()->id]);
 
             return response()->json($cryptos);
 
@@ -104,14 +104,35 @@ class CryptoWalletController extends Controller
     public function destroy(CryptoWallet $cryptoWallet)
     {
         try {
-            // $cryptos = DB::select('SELECT c.id, c.name, cv.value, cv.date FROM crypto_values AS cv
-            //                     JOIN cryptos AS c ON c.id = cv.crypto_id
-            //                     WHERE cv.crypto_id = ? order by cv.date', [$id]);
+            $crypto_values = DB::select('SELECT * FROM `crypto_values`
+                                    WHERE `crypto_id` = ? order by date desc;', [$cryptoWallet->crypto_id]);
+            $cryptoValueToday = $crypto_values[0]->value;
+
+            $addToSolde = $cryptoWallet->quantity * $cryptoValueToday;
+
+            $selectSolde = DB::select('SELECT solde FROM wallets WHERE user_id = ?', [Auth::user()->id]);
+
+            $updateSolde = DB::update('UPDATE wallets SET solde = ? WHERE user_id = ?',
+                [
+                    $selectSolde[0]->solde + $addToSolde,
+                    Auth::user()->id
+                ]
+            );
+
+            $newSolde = DB::select('SELECT solde FROM wallets WHERE user_id = ?', [Auth::user()->id]);
+
 
             $cryptoWallet->delete();
 
-            return response()->json(null, 201);
 
+            return Response::json(
+                [
+                    "addToSolde" => $addToSolde,
+                    "status" => \Illuminate\Http\Response::HTTP_OK,
+                    "newSolde" => $newSolde
+                ],
+                \Illuminate\Http\Response::HTTP_OK,
+            );
         } catch (\Exception $exception) {
             return $exception;
         }
