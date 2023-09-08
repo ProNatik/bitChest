@@ -24,7 +24,7 @@ async function sellCryptoBtn(crypto) {
     try {
         await sellCrypto(crypto).then(data => {
             Store.solde = data.newSolde[0].solde;
-            success.value = data.addToSolde +'$ gagné' 
+            success.value = data.addToSolde +'€ gagné' 
         });
         boughtCryptos.value = boughtCryptos.value.filter((bC) => bC !== crypto)
     } catch (error) {
@@ -35,9 +35,9 @@ async function sellCryptoBtn(crypto) {
 </script>
 
 <template>
-  
-  <v-sheet maxWidth="800" class="mt-5 mx-auto w-75" rounded="xl">
-    <v-table v-if="boughtCryptos">
+  <div maxWidth="800" class="h-screen w-100 mt-12">
+    <v-sheet maxWidth="800" class="mt-5 mb-2 mx-auto w-75 rounded-lg">
+    <v-table v-if="boughtCryptos" style="border: solid black;">
     <thead>
       <tr>
         <th class="text-center">
@@ -80,16 +80,19 @@ async function sellCryptoBtn(crypto) {
         </td>
       </tr>
     </tbody>
-  </v-table>
-  <v-skeleton-loader
+    </v-table>
+    <v-skeleton-loader
       type="table"
       v-else-if="loading"
       :style="{ maxWidth: '40rem' }"
       class="ma-auto"
     />
-    <v-alert type="success" v-if="success" :text="success" />
-    <v-alert type="error" v-if="errorMessage" :text="errorMessage" />
-  </v-sheet>
+    
+    </v-sheet>
+    <v-alert class="mx-auto w-25" color="success" v-if="success" :text="success" />
+    <v-alert class="mx-auto w-25" color="error" v-if="errorMessage" :text="errorMessage" />
+  </div>
+  
   
 
 </template>

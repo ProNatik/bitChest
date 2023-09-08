@@ -61,7 +61,8 @@ const formState = ref();
 </script>
 
 <template>
-    <v-sheet max-width="300" class="mx-auto mt-10">
+  <div class="h-screen w-100 mt-12">
+    <v-sheet max-width="300" min-width="200" class="mx-auto mt-10 mb-2 elevation-2 rounded-lg"  style="padding: 10px;" color="grey-lighten-3">
       <v-form validate-on="blur" @submit.prevent="submit" v-model="formState">
         <v-text-field
           variant="outlined"
@@ -87,4 +88,6 @@ const formState = ref();
       </v-form>
       <v-alert type="error" v-if="error" :text="error" />
     </v-sheet>
+  </div>
+    
   </template>

@@ -56,43 +56,40 @@ const formState = ref();
 
 
 <template>
-    <div>
-        
-        <v-sheet max-width="500" min-width="100" class="mx-auto mt-10" v-if="crypto" style="margin-bottom: 10px;">
-            
-            
+    <div class="h-screen w-100 mt-12">
+        <v-sheet max-width="500" min-width="200" class="mx-auto mt-10 mb-2 elevation-2 rounded-lg" v-if="crypto" style="padding: 10px;" color="grey-lighten-3">
             <div  style="margin-bottom: 5px; text-align: center;">
                 {{ crypto[0].name }}
             </div>
-        <v-form validate-on="blur" @submit.prevent="buy" v-model="formState" class="mx-auto">
-            <v-text-field
-            variant="outlined"
-            v-model="crypto[29].value"
-            label="Price"
-            readonly
-            class="mt-2"
-            ></v-text-field>
-            <v-text-field
-            variant="outlined"
-            v-model="form.quantity"
-            :rules="[rules.required]"
-            label="Quantity"
-            type="text"
-            class="mt-2"
-            ></v-text-field>
-    
-            <v-btn
-            :loading="loading"
-            type="submit"
-            block
-            class="mt-2"
-            text="Buy"
-            ></v-btn>
-        </v-form>
+            <v-form validate-on="blur" @submit.prevent="buy" v-model="formState" class="mx-auto p-2">
+                <v-text-field
+                variant="outlined"
+                v-model="crypto[29].value"
+                label="Price"
+                readonly
+                class="mt-2"
+                ></v-text-field>
+                <v-text-field
+                variant="outlined"
+                v-model="form.quantity"
+                :rules="[rules.required]"
+                label="Quantity"
+                type="text"
+                class="mt-2"
+                ></v-text-field>
+        
+                <v-btn
+                :loading="loading"
+                type="submit"
+                block
+                class="mt-2"
+                text="Buy"
+                ></v-btn>
+            </v-form>
         
         </v-sheet>
-        <v-alert type="success" v-if="success" :text="success" />
-        <v-alert type="error" v-if="error" :text="error" />
+        <v-alert class="mx-auto w-25" color="success" v-if="success" :text="success" />
+        <v-alert class="mx-auto w-25" color="error" v-if="error" :text="error" />
     </div>
     
   </template>

@@ -10,4 +10,16 @@ export const userStore = defineStore('user', () => {
     const solde = ref(null);
 
     return { role, solde }
-})
+});
+
+export function clearUserStore() {
+    const Store = userStore();
+    Store.role = null;
+    Store.solde = null;
+};
+  
+  
+  
+  
+  
+  

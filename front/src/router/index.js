@@ -14,6 +14,8 @@ import ClientBuyCryptoView from '@/views/client/ClientBuyCryptoView.vue'
 import ClientProfilView from '@/views/client/ClientProfilView.vue'
 import { userStore } from '@/store'
 
+
+
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
@@ -102,6 +104,7 @@ router.beforeEach((to, from, next) => {
 
     if (to.meta.admin && Store.role !== 'admin') {
         localStorage.removeItem('token');
+        Store.$reset();
         next({name: 'login'});
     } else {
         next();

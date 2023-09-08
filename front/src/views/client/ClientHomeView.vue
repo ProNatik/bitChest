@@ -24,8 +24,8 @@ function buyCrypto(crypto) {
 <template>
   
   
-  <v-sheet maxWidth="800" class="mt-5 mx-auto w-75" rounded="xl">
-    <v-table v-if="cryptos">
+  <v-sheet maxWidth="800" class="mt-5 mx-auto w-75 mt-5 rounded-lg">
+    <v-table v-if="cryptos" style="border: solid black;">
     <thead>
       <tr>
         <th class="text-center">

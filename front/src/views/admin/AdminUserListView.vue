@@ -31,9 +31,9 @@ function updateUser(user) {
 <template>
   
   
-  <v-alert type="error" v-if="errorMessage" :text="errorMessage" />
-  <v-sheet maxWidth="800" class="mt-5 mx-auto w-75" rounded="xl">
-    <v-table v-if="users">
+  <v-alert color="error" v-if="errorMessage" :text="errorMessage" />
+  <v-sheet maxWidth="800" class="mt-5 mx-auto w-75 mt-5 rounded-lg">
+    <v-table v-if="users" style="border: solid black;">
     <thead>
       <tr>
         <th class="text-center">
@@ -62,15 +62,15 @@ function updateUser(user) {
             <v-btn
             @click="updateUser(user)"
             variant="outlined"
-            size="x-small"
-            color="teal"
+            size="small"
+            color="blue"
             >Update</v-btn>
         </td>
         <td>
             <v-btn
             @click="deleteUser(user)"
             variant="outlined"
-            size="x-small"
+            size="small"
             color="red"
             >Delete</v-btn>
         </td>

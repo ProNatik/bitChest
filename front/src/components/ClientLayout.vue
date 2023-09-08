@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import router from '../router';
 import axiosClient from "@/axios";
-import { userStore } from '../store';
+import { clearUserStore, userStore } from '@/store';
 
 const title = computed(() => {
   return router.currentRoute.value.meta.title;
@@ -15,6 +15,7 @@ async function logout() {
       await axiosClient.post('/logout')
     .then(res => {
       localStorage.removeItem('token');
+      clearUserStore();
     })
     .catch(err => console.log(err));
 
@@ -32,7 +33,7 @@ const routes = [
 </script>
 
 <template>
-    <v-layout class="rounded rounded-md">
+    <v-layout class="rounded rounded-md h-screen" >
       <v-navigation-drawer>
         <div class="d-flex justify-center align-center">
             <img src="@/assets/bitchest_logo.png" alt="logo" style="height: 55px;">
@@ -43,7 +44,7 @@ const routes = [
         
         <v-list>
           <v-list-item>
-            <v-list-item-title>Solde : {{ Store.solde }} $ </v-list-item-title>
+            <v-list-item-title>Solde : {{ Store.solde }} € </v-list-item-title>
           </v-list-item>
           <v-list-item v-for="{ to, text } in routes" :to="to" :key="to">
             <v-list-item-title>{{ text }}</v-list-item-title>

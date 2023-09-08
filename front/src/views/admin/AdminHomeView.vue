@@ -21,9 +21,9 @@ function showCrypto(crypto) {
 <template>
   
   
-  <v-alert type="error" v-if="errorMessage" :text="errorMessage" />
-  <v-sheet maxWidth="800" class="mt-5 mx-auto w-75" rounded="xl">
-    <v-table v-if="cryptos">
+  <v-alert color="error" v-if="errorMessage" :text="errorMessage" />
+  <v-sheet maxWidth="800" class="mt-5 mx-auto w-75 mt-5 rounded-lg">
+    <v-table v-if="cryptos" style="border: solid black;">
     <thead>
       <tr>
         <th class="text-center">

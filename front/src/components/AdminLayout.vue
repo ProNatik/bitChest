@@ -2,10 +2,13 @@
 import { computed, ref } from 'vue';
 import router from '../router';
 import axiosClient from "@/axios";
+import { userStore, clearUserStore } from '@/store';
 
 const title = computed(() => {
   return router.currentRoute.value.meta.title;
 });
+
+const Store = userStore();
 
 const routes = [
   { to: '/admin/adminHome', text: 'Home' },
@@ -18,6 +21,7 @@ async function logout() {
       await axiosClient.post('/logout')
     .then(res => {
       localStorage.removeItem('token');
+      clearUserStore();
     })
     .catch(err => console.log(err));
 
@@ -30,7 +34,7 @@ async function logout() {
 </script>
 
 <template>
-    <v-layout class="rounded rounded-md">
+    <v-layout class="rounded rounded-md h-screen">
       <v-navigation-drawer>
         <div class="d-flex justify-center align-center">
             <img src="@/assets/bitchest_logo.png" alt="logo" style="height: 55px;">
