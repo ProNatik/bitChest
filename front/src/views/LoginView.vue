@@ -63,6 +63,9 @@ const formState = ref();
 <template>
   <div class="h-screen w-100 mt-12">
     <v-sheet max-width="300" min-width="200" class="mx-auto mt-10 mb-2 elevation-2 rounded-lg"  style="padding: 10px;" color="grey-lighten-3">
+      <div class="d-flex justify-center align-center">
+            <img src="@/assets/bitchest_logo.png" alt="logo" style="height: 55px;">
+        </div>
       <v-form validate-on="blur" @submit.prevent="submit" v-model="formState">
         <v-text-field
           variant="outlined"
